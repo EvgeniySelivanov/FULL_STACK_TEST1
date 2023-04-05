@@ -26,5 +26,8 @@ groupRouter.post('/:idGroup',GroupController.addUserToGroup)
 groupRouter.patch('/:idGroup/image', upload.single('image'), GroupController.addImageGroup);
 
 groupRouter.get('/users/:idUser', GroupController.getUserGroups);
+groupRouter.get('/', GroupController.getAllGroup);
+
+
 
 module.exports = groupRouter;

@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch } from 'react-redux';
 import { createUser } from './../../store/usersSlice';
+import style from './UserForm.module.scss';
 const initialValues = {
   firstName: "",
   lastName: "",
@@ -22,7 +23,8 @@ const UserForm = () => {
 
   return <Formik initialValues={initialValues} onSubmit={onSubmit}>
 
-    <Form>
+    <Form className={style.form}>
+      <p>Create new user</p>
       <Field type="text" name="firstName" placeholder="firstName" />
       <Field type="text" name="lastName" placeholder="lastName" />
       <Field type="email" name="email" placeholder="email" />

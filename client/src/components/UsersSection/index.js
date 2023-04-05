@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllUsers } from "../../store/usersSlice";
 import CONSTANTS from "../../constants";
+import style from './UsersSection.module.scss';
+
 
 
 
@@ -14,7 +16,7 @@ const UsersSection = (props) => {
     dispatch(getAllUsers({ offset: 0, limit: amount }));
   }, [amount, dispatch])
   return (
-    <section>
+    <section className={style.main}>
       <h2>Users List</h2>
       <p>
         {CONSTANTS.AMOUNTS.map((item, i) => <button key={i} onClick={() => { setAmount(item) }}>{item}</button>)}

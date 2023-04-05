@@ -1,5 +1,9 @@
 const CONSTANTS={
 MIN_LIMIT:5,
 AMOUNTS:[5,7,10],
+THEMES:{
+  LIGHT:'LIGHT',
+  DARK:'DARK',
+},
 }
 export default CONSTANTS;
