@@ -1,20 +1,21 @@
 const createError = require('http-errors');
-const _=require('lodash');
+const _ = require('lodash');
 const { Op } = require("sequelize");
 const { User } = require('../models');
 
-const checkBody=(body)=>_.pick(body,['firstName','lastName','email','password','birthday','isMale']);
+const checkBody = (body) => _.pick(body, ['firstName', 'lastName', 'email', 'password', 'birthday', 'isMale']);
 
 module.exports.createUser = async (req, res, next) => {
   try {
     const { body } = req;
-    const value=checkBody(body);
+    const value = checkBody(body);
     const createdUser = await User.create(value);
     if (!createdUser) {
       return next(createError(400, 'Check your data'));
     }
-    createdUser.password=undefined;
-    res.status(201).send({ data: createdUser });
+    const userNew = await createdUser.get();
+    userNew.password = undefined;
+    res.status(201).send({ data: userNew });
   } catch (error) {
     next(error);
   }
@@ -28,7 +29,7 @@ module.exports.getAllUsers = async (req, res, next) => {
     const users = await User.findAll({
       ...paginate,
       attributes: { exclude: ['password'] },
-          })
+    })
     if (!users) {
       return next(createError(404, 'Not Found'));
     }
@@ -41,7 +42,7 @@ module.exports.getAllUsers = async (req, res, next) => {
 module.exports.updateUser = async (req, res, next) => {
   try {
     const { body, params: { idUser } } = req;
-    const value=checkBody(body);
+    const value = checkBody(body);
     const [rowsCount, [updatedUser]] = await User.update(value, {
       where: {
         id: {
@@ -53,7 +54,7 @@ module.exports.updateUser = async (req, res, next) => {
     if (!updatedUser) {
       return next(createError(400, 'Bad request'));
     }
-      res.status(202).send({ data: updatedUser })
+    res.status(202).send({ data: updatedUser })
   } catch (error) {
     next(error);
   }
@@ -62,7 +63,7 @@ module.exports.updateUser = async (req, res, next) => {
 module.exports.updateUserInstance = async (req, res, next) => {
   try {
     const { body, params: { idUser } } = req;
-    const value=checkBody(body);
+    const value = checkBody(body);
     const userInstance = await User.findByPk(idUser);
     const userUpdated = await userInstance.update(value, {
       returning: true
