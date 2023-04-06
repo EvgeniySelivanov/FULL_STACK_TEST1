@@ -1,14 +1,21 @@
-import React, { useReducer } from "react";
+import React, { useReducer, Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { MenuOpen } from '@mui/icons-material';
 import { MenuContext } from './contexts';
-
 import NavMenu from './components/NavMenu';
-import HomePage from "./pages/HomePage";
-import UsersPage from "./pages/UsersPage";
-import GroupsPage from "./pages/GroupsPage";
-import TasksPage from "./pages/TasksPage";
-import UserProfile from "./components/UserProfile";
+const HomePage=lazy(()=>import("./pages/HomePage"));
+const UsersPage=lazy(()=>import("./pages/UsersPage"));
+const GroupsPage=lazy(()=>import("./pages/GroupsPage"));
+const TasksPage=lazy(()=>import("./pages/TasksPage"));
+const UserProfile=lazy(()=>import("./components/UserProfile"));
+
+
+
+// import HomePage from "./pages/HomePage";
+// import UsersPage from "./pages/UsersPage";
+// import GroupsPage from "./pages/GroupsPage";
+// import TasksPage from "./pages/TasksPage";
+// import UserProfile from "./components/UserProfile";
 
 
 
@@ -32,7 +39,6 @@ const reducer = (state, action) => {
   }
 }
 
-
 function App() {
   const [state, dispatch] = useReducer(reducer, { isMenuOpen: false });
 
@@ -40,6 +46,7 @@ function App() {
     event.stopPropagation();
     return dispatch({ type: 'MENU_OPEN' });
   }
+
   const closeMenu = () => {
     return dispatch({ type: 'MENU_CLOSE' });
   }
@@ -48,14 +55,16 @@ function App() {
       <BrowserRouter>
         <MenuOpen onClick={openMenu} />
         <NavMenu />
-        <Routes>
+        <Suspense fallback={'loading...'}>
+          <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/users' element={<UsersPage />} />
           <Route path='/groups' element={<GroupsPage />} />
           <Route path='/tasks' element={<TasksPage />} />
           <Route path='/users/:idUser' element={<UserProfile />} />
-
         </Routes>
+        </Suspense>
+        
       </BrowserRouter>
     </MenuContext.Provider >
   );

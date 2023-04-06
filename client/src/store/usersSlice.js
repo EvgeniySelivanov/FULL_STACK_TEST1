@@ -2,8 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import * as httpClient from "../api";
 import { decarateAsyncThunk, pendingReducer, rejectedReducer } from "./helpers";
 
-
-
 export const getAllUsers = decarateAsyncThunk(
   {
     type: 'users/getAllUsers',
@@ -24,7 +22,6 @@ export const createUser = decarateAsyncThunk(
     thunk: httpClient.postUser
   }
 );
-
 
 const userSlice = createSlice({
   name: 'users',

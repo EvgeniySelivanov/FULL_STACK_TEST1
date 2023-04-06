@@ -28,18 +28,21 @@ const TasksSection = (props) => {
         {/* {tasks.map((task,i) => ( */}
           {/* <article key={i}><h3>{task.id} {task.content}</h3></article> */}
           <table>
-            <tr>
-              <td><strong>Id</strong></td>
-              <td><strong>Content</strong></td>
-              <td><strong>createdAt</strong></td>
-
-            </tr>
-            {tasks.map((task,i) => (
+            <thead>
               <tr>
-              <td>{task.id}</td>
-              <td>{task.content}</td>
-              <td>{task.createdAt}</td>
-            </tr>))}
+                <td><strong>Id</strong></td>
+                <td><strong>Content</strong></td>
+                <td><strong>createdAt</strong></td>
+              </tr>
+            </thead>
+            <tbody>
+              {tasks.map((task,i) => (
+                <tr key={i}>
+                <td>{task.id}</td>
+                <td>{task.content}</td>
+                <td>{task.createdAt}</td>
+              </tr>))}
+            </tbody>
           </table>
         
         <button onClick={() => { dispatch(getAllTasksMore({ offset: tasks.length, limit: amount})) }}>load more...</button>
