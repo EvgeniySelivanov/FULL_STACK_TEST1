@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import UsersPage from "./pages/UsersPage";
 import GroupsPage from "./pages/GroupsPage";
 import TasksPage from "./pages/TasksPage";
+import UserProfile from "./components/UserProfile";
 
 
 
@@ -52,6 +53,8 @@ function App() {
           <Route path='/users' element={<UsersPage />} />
           <Route path='/groups' element={<GroupsPage />} />
           <Route path='/tasks' element={<TasksPage />} />
+          <Route path='/users/:idUser' element={<UserProfile />} />
+
         </Routes>
       </BrowserRouter>
     </MenuContext.Provider >

@@ -32,6 +32,7 @@ const userSlice = createSlice({
     users: [],
     error: null,
     isFetching: false,
+    currentUser:null,
   },
   reducers: {
   
