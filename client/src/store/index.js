@@ -10,6 +10,7 @@ const store = configureStore({
         ignoredActions: [
           'users/getAllUsers/fulfilled',
           'users/getAllUsersMore/fulfilled',
+          'users/getUser/fulfilled',
           'groups/getAllGroups/fulfilled',
           'groups/getAllGroupsMore/fulfilled',
           'tasks/getAllTasks/fulfilled',

@@ -9,6 +9,12 @@ export const getAllUsers = decarateAsyncThunk(
   }
 );
 
+export const getUser = decarateAsyncThunk(
+  {
+    type: 'users/getUser',
+    thunk: httpClient.getUser
+  }
+);
 export const getAllUsersMore = decarateAsyncThunk(
   {
     type: 'users/getAllUsersMore',
@@ -29,10 +35,10 @@ const userSlice = createSlice({
     users: [],
     error: null,
     isFetching: false,
-    currentUser:null,
+    currentUser:[],
   },
   reducers: {
-  
+
   },
   extraReducers: (builder) => {
     builder.addCase(getAllUsers.pending, pendingReducer);
@@ -44,6 +50,16 @@ const userSlice = createSlice({
     });
     builder.addCase(getAllUsers.rejected, rejectedReducer);
     //
+
+    builder.addCase(getUser.pending, pendingReducer);
+    builder.addCase(getUser.fulfilled, (state, action) => {
+      const { payload: { data: { data } } } = action;
+      state.error = null;
+      state.isFetching = false;
+      state.currentUser = data;
+    });
+    builder.addCase(getUser.rejected, rejectedReducer);
+
 
     builder.addCase(getAllUsersMore.pending, pendingReducer);
     builder.addCase(getAllUsersMore.fulfilled, (state, action) => {

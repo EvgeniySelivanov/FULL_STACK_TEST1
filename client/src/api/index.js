@@ -42,6 +42,10 @@ export const getAllUsers = (options = {}) => {
   }
   return httpClient.get(`/users?${qs.stringify(readyOptions)}`);
 }
+
+export const getUser = (idUser) => httpClient.get(`/users/${idUser}`);
+
+
 export const postUser = (values) => httpClient.post('/users', values);
 
 
