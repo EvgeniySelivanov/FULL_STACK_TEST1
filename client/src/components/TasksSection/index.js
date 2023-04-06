@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllTasks} from "../../store/tasksSlice";
+import { getAllTasks, getAllTasksMore} from "../../store/tasksSlice";
 import CONSTANTS from "../../constants";
 import style from './TasksSection.module.scss';
 
@@ -42,7 +42,7 @@ const TasksSection = (props) => {
             </tr>))}
           </table>
         
-        <button onClick={() => { dispatch(getAllTasks({ offset: tasks.length, })) }}>load more...</button>
+        <button onClick={() => { dispatch(getAllTasksMore({ offset: tasks.length, limit: amount})) }}>load more...</button>
       </div>
     </section>
   );

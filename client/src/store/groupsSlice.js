@@ -1,8 +1,14 @@
-import {  createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import * as httpClient from "../api";
-import { decarateAsyncThunk, pendingReducer,rejectedReducer} from "./helpers";
+import { decarateAsyncThunk, pendingReducer, rejectedReducer } from "./helpers";
 
 
+export const createGroup = decarateAsyncThunk(
+  {
+    type: 'groups/createGroup',
+    thunk: httpClient.postGroups
+  }
+)
 
 export const getAllGroups = decarateAsyncThunk(
   {
@@ -17,6 +23,8 @@ export const getAllGroupsMore = decarateAsyncThunk(
     thunk: httpClient.getAllGroups
   }
 );
+
+
 const groupSlice = createSlice({
   name: 'groups',
   initialState: {
@@ -26,19 +34,28 @@ const groupSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(createGroup.pending, pendingReducer);
+    builder.addCase(createGroup.fulfilled, (state, action) => {
+      const { payload: { data: { data } } } = action;
+      state.error = null;
+      state.isFetching = false;
+      state.groups.push(data);
+    });
+    builder.addCase(createGroup.rejected, rejectedReducer);
+
     builder.addCase(getAllGroups.pending, pendingReducer);
     builder.addCase(getAllGroups.fulfilled, (state, action) => {
-      const {payload:{data:{data}}}=action;
+      const { payload: { data: { data } } } = action;
       state.error = null;
       state.isFetching = false;
       state.groups = data;
     });
     builder.addCase(getAllGroups.rejected, rejectedReducer);
-   
+
 
     builder.addCase(getAllGroupsMore.pending, pendingReducer);
     builder.addCase(getAllGroupsMore.fulfilled, (state, action) => {
-      const {payload:{data:{data}}}=action;
+      const { payload: { data: { data } } } = action;
       state.error = null;
       state.isFetching = false;
       state.groups.push(...data);

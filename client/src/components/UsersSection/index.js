@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllUsers } from "../../store/usersSlice";
+import { getAllUsers, getAllUsersMore } from "../../store/usersSlice";
 import CONSTANTS from "../../constants";
 import style from './UsersSection.module.scss';
 
@@ -26,7 +26,7 @@ const UsersSection = (props) => {
       {users.map((user) => (
         <article key={user.id}><h3>{user.firstName} {user.lastName}</h3></article>
       ))}
-      <button onClick={() => { dispatch(getAllUsers({ offset: users.length, })) }}>load more...</button>
+      <button onClick={() => { dispatch(getAllUsersMore({ offset: users.length, limit: amount })) }}>load more...</button>
     </section>
   );
 };

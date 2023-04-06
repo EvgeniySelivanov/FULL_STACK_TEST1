@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllGroups} from "../../store/groupsSlice";
+import { getAllGroups, getAllGroupsMore } from "../../store/groupsSlice";
+import GroupForm from '../GroupForm/index';
 import CONSTANTS from "../../constants";
 import style from './GroupSection.module.scss';
 
-
-
-
-
 const GroupsSection = (props) => {
   const [amount, setAmount] = useState(CONSTANTS.MIN_LIMIT);
-
   const { groups, error, isFetching } = useSelector((state) => state.groups);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,7 +14,9 @@ const GroupsSection = (props) => {
   }, [amount, dispatch])
   return (
     <section className={style.main}>
+      <GroupForm />
       <h2>Groups List</h2>
+
       <div>
         <p>
           {CONSTANTS.AMOUNTS.map((item, i) => <button key={i} onClick={() => { setAmount(item) }}>{item}</button>)}
@@ -28,7 +26,7 @@ const GroupsSection = (props) => {
         {groups.map((group) => (
           <article key={group.id}><h3>{group.name}</h3></article>
         ))}
-        <button onClick={() => { dispatch(getAllGroups({ offset: groups.length, })) }}>load more...</button>
+        <button onClick={() => { dispatch(getAllGroupsMore({ offset: groups.length, })) }}>load more...</button>
       </div>
     </section>
   );

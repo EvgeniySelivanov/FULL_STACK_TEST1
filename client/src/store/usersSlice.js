@@ -34,9 +34,7 @@ const userSlice = createSlice({
     isFetching: false,
   },
   reducers: {
-    // loadUsers(state, action) {
-    //   state.users = action.payload
-    // },
+  
   },
   extraReducers: (builder) => {
     builder.addCase(getAllUsers.pending, pendingReducer);
@@ -70,6 +68,6 @@ const userSlice = createSlice({
     builder.addCase(createUser.rejected, rejectedReducer);
   }
 });
-// const { loadUsers } = userSlice.actions;
+
 
 export default userSlice.reducer;
