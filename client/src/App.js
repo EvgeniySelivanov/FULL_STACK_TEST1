@@ -3,11 +3,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { MenuOpen } from '@mui/icons-material';
 import { MenuContext } from './contexts';
 import NavMenu from './components/NavMenu';
+
 const HomePage=lazy(()=>import("./pages/HomePage"));
 const UsersPage=lazy(()=>import("./pages/UsersPage"));
 const GroupsPage=lazy(()=>import("./pages/GroupsPage"));
 const TasksPage=lazy(()=>import("./pages/TasksPage"));
 const UserProfile=lazy(()=>import("./components/UserProfile"));
+const UserUpdate=lazy(()=>import("./components/UserUpdate"));
 
 
 
@@ -62,6 +64,8 @@ function App() {
           <Route path='/groups' element={<GroupsPage />} />
           <Route path='/tasks' element={<TasksPage />} />
           <Route path='/users/:idUser' element={<UserProfile />} />
+          <Route path='/users/update/:idUser' element={<UserUpdate />} />
+
         </Routes>
         </Suspense>
         

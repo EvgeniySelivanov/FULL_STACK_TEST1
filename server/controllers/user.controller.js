@@ -49,7 +49,7 @@ module.exports.updateUser = async (req, res, next) => {
           [Op.eq]: idUser
         }
       },
-      returning: ['email', 'last_name']
+      returning: ['email', 'last_name','first_name','birthday','is_male']
     });
     if (!updatedUser) {
       return next(createError(400, 'Bad request'));

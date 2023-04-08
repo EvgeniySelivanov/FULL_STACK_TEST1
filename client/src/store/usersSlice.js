@@ -8,7 +8,21 @@ export const getAllUsers = decarateAsyncThunk(
     thunk: httpClient.getAllUsers
   }
 );
+export const deleteUser = decarateAsyncThunk(
+  {
+    type: 'users/deleteUser',
+    thunk: httpClient.deleteUser
+  }
+)
+  export const updateUser = decarateAsyncThunk(
+   
+    {
+      type: 'users/updateUser',
+      thunk: httpClient.updateUser
+    }
 
+
+)
 export const getUser = decarateAsyncThunk(
   {
     type: 'users/getUser',
@@ -35,7 +49,7 @@ const userSlice = createSlice({
     users: [],
     error: null,
     isFetching: false,
-    currentUser:[],
+    currentUser: [],
   },
   reducers: {
 
@@ -60,6 +74,14 @@ const userSlice = createSlice({
     });
     builder.addCase(getUser.rejected, rejectedReducer);
 
+    //delete user
+    builder.addCase(deleteUser.pending, pendingReducer);
+    builder.addCase(deleteUser.fulfilled, (state) => {
+      state.error = null;
+      state.isFetching = false;
+    });
+    builder.addCase(deleteUser.rejected, rejectedReducer);
+
 
     builder.addCase(getAllUsersMore.pending, pendingReducer);
     builder.addCase(getAllUsersMore.fulfilled, (state, action) => {
@@ -80,6 +102,20 @@ const userSlice = createSlice({
       state.users.push(data);
     });
     builder.addCase(createUser.rejected, rejectedReducer);
+    //
+
+
+    builder.addCase(updateUser.pending, pendingReducer);
+    builder.addCase(updateUser.fulfilled, (state,action) => {
+      console.log('reducer',action);
+      const { meta:{arg} } = action;
+      state.error = null;
+      state.isFetching = false;
+      state.users=[];
+      state.users.push(arg);
+      
+    });
+    builder.addCase(updateUser.rejected, rejectedReducer);
   }
 });
 
