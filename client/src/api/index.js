@@ -47,14 +47,7 @@ export const getAllUsers = (options = {}) => {
 
 export const getUser = (idUser) => httpClient.get(`/users/${idUser}`);
 export const deleteUser = (idUser) => httpClient.delete(`/users/${idUser}`);
-export const updateUser = (values,idUser) => {
-  console.log('api',values);
-  console.log('api',idUser);
-  httpClient.patch(`/users/update/${values.id}`,values);
-
-  // httpClient.patch(`/users/update/${idUser}`,values);
-
-}
+export const updateUser = (values) => httpClient.patch(`/users/${values.id}`,values);
 export const postUser = (values) => httpClient.post('/users', values);
 
 

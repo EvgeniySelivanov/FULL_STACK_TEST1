@@ -10,7 +10,7 @@ const userRouter = Router();
 userRouter.post('/', UserController.createUser);
 userRouter.get('/',paginate, UserController.getAllUsers);
 userRouter.get('/:idUser',  UserController.getUser);
-userRouter.patch('/update/:idUser', checkUser, UserController.updateUser);
+userRouter.patch('/:idUser', checkUser, UserController.updateUser);
 userRouter.patch('/instance/:idUser', checkUser, UserController.updateUserInstance);
 userRouter.delete('/:idUser', checkUser, UserController.deleteUser);
 

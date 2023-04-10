@@ -11,6 +11,7 @@ const store = configureStore({
           'users/getAllUsers/fulfilled',
           'users/getAllUsersMore/fulfilled',
           'users/getUser/fulfilled',
+          'users/getUpdateUser/fulfilled',
           'users/deleteUser/fulfilled',
           'users/deleteUser/rejected',
           'users/updateUser/rejected',
