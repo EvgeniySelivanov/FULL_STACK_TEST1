@@ -50,7 +50,7 @@ const userSlice = createSlice({
     users: [],
     error: null,
     isFetching: false,
-    currentUser: [],
+    currentUser:{},
   },
   reducers: {
 

@@ -6,6 +6,7 @@ import CONSTANTS from "../../constants";
 import style from './UsersSection.module.scss';
 import AmountBtns from "../AmountBtns";
 
+
 const UsersSection = (props) => {
   const [amount, setAmount] = useState(CONSTANTS.MIN_LIMIT);
   const { users, error, isFetching } = useSelector((state) => state.users);
@@ -27,6 +28,7 @@ const UsersSection = (props) => {
 
   return (
     <section className={style.main}>
+      
       <h2>Users List</h2>
       <AmountBtns setAmount={setAmount} />
       {error && <h3>Error!!!</h3>}

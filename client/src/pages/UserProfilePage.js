@@ -3,9 +3,9 @@ import UserProfile from "../components/UserProfile";
 
 
 
-const UsersProfile = (props) => {
+const UserProfilePage = () => {
   return (
     <UserProfile />
   );
 }
-export default UsersProfile;
+export default UserProfilePage;

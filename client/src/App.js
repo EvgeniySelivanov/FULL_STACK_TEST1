@@ -4,22 +4,11 @@ import { MenuOpen } from '@mui/icons-material';
 import { MenuContext } from './contexts';
 import NavMenu from './components/NavMenu';
 
-const HomePage=lazy(()=>import("./pages/HomePage"));
-const UsersPage=lazy(()=>import("./pages/UsersPage"));
-const GroupsPage=lazy(()=>import("./pages/GroupsPage"));
-const TasksPage=lazy(()=>import("./pages/TasksPage"));
-const UserProfile=lazy(()=>import("./pages/UserProfile"));
-
-
-
-
-// import HomePage from "./pages/HomePage";
-// import UsersPage from "./pages/UsersPage";
-// import GroupsPage from "./pages/GroupsPage";
-// import TasksPage from "./pages/TasksPage";
-// import UserProfile from "./components/UserProfile";
-
-
+const HomePage = lazy(() => import("./pages/HomePage"));
+const UsersPage = lazy(() => import("./pages/UsersPage"));
+const GroupsPage = lazy(() => import("./pages/GroupsPage"));
+const TasksPage = lazy(() => import("./pages/TasksPage"));
+const UserProfilePage = lazy(() => import("./pages/UserProfilePage"));
 
 
 const reducer = (state, action) => {
@@ -59,14 +48,14 @@ function App() {
         <NavMenu />
         <Suspense fallback={'loading...'}>
           <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/users' element={<UsersPage />} />
-          <Route path='/groups' element={<GroupsPage />} />
-          <Route path='/tasks' element={<TasksPage />} />
-          <Route path='/users/:idUser' element={<UserProfile />} />
-                 </Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/users' element={<UsersPage />} />
+            <Route path='/groups' element={<GroupsPage />} />
+            <Route path='/tasks' element={<TasksPage />} />
+            <Route path='/users/:idUser' element={<UserProfilePage />} />
+          </Routes>
         </Suspense>
-        
+
       </BrowserRouter>
     </MenuContext.Provider >
   );

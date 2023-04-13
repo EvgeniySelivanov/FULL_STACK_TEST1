@@ -1,8 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const decarateAsyncThunk = ({ type, thunk }) => {
-
-
   const asyncThunk = createAsyncThunk(
     type,
     async (params, { rejectWithValue }) => {
@@ -14,18 +12,14 @@ export const decarateAsyncThunk = ({ type, thunk }) => {
       }
     }
   );
-
-
   return asyncThunk;
-}
-
-export const pendingReducer=(state, action) => {
+};
+export const pendingReducer = (state, action) => {
   state.isFetching = true;
   state.error = null;
 
-}
-
-export const rejectedReducer=(state, action) => {
+};
+export const rejectedReducer = (state, action) => {
   state.isFetching = false;
   state.error = action.payload;
-}
+};
