@@ -9,7 +9,11 @@
     "seederStorage": "json"
   },
   "test": {
-  
+    "username": "postgres",
+    "password": "postgres",
+    "database": "fm_orm_test",
+    "host": "localhost",
+    "dialect": "postgres"
   },
   "production": {
    
